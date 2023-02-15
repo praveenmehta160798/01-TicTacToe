@@ -11,6 +11,7 @@ for(let i = 0; i < boxes.length; i++){
 
 
 function userClick(element){
+    // debugger;
     element.setAttribute('onclick', '');
 
     element.classList.add('box-done');
@@ -18,13 +19,15 @@ function userClick(element){
     // element.classList.remove('box');
 
     element.innerHTML = turnInfo_span.innerHTML;
-
-    turnInfo_span.innerHTML = changeTurn();
-    checkWin();
+    var abc = checkWin();
+    if(abc){
+        turnInfo_span.innerHTML = changeTurn();
+    }
 }
 
 
 function checkWin(){
+    let winnerConfirm = 1;
     let winCombinations = [
         [0,1,2],
         [3,4,5],
@@ -43,21 +46,23 @@ function checkWin(){
             console.log(`${turnInfo_span.innerHTML} wins`);
             for(let i = 0; i < 3 ;i++){
                 boxes[element[i]].style.background = 'greenyellow';
-                boxes[element[i]].style.transition = 'all 1.5s';
+                boxes[element[i]].style.transition = 'all 0.5s';
+                winnerConfirm = 0;
             }
             setTimeout(() => {
                 document.querySelector('.victory-text').style.transform = 'scale(1)';
-            }, 1500);
+            }, 1000);
             setTimeout(() => {
                 window.alert(`${changeTurn()} wins the game.`);
                 location.reload();
-            }, 2000);
+            }, 1500);
             console.log(`val0 = ${val0}`);
             console.log(`val1 = ${val1}`);
             console.log(`val2 = ${val2}`);
 
         }
     });
+    return winnerConfirm;
 }
 
 function changeTurn(){
@@ -66,7 +71,7 @@ function changeTurn(){
         setTimeout(() => {
             window.alert(`Game draw.`);
             location.reload();
-        }, 500);
+        }, 2000);
     }
     return turnInfo_span.innerHTML == 'O' ? 'X' : 'O';
 }
