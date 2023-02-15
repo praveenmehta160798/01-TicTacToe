@@ -11,8 +11,8 @@ for(let i = 0; i < boxes.length; i++){
 
 
 function userClick(element){
-    // debugger;
     element.setAttribute('onclick', '');
+    // debugger;
 
     element.classList.add('box-done');
     element.classList.add('done');
